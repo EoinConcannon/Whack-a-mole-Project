@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Whack_A_Mole_Project.MainPage">
+
+    <Grid>
+        <!--setup background image-->
+        <Image Source="molebackground.png" Aspect="AspectFill"/>
+        <!--Main Stackedlayout for all contents-->
+        <VerticalStackLayout>
+
+            <!--Time limit at top of app-->
+            <VerticalStackLayout>
+                <Label Text="30" x:Name="TimeLimit" HorizontalTextAlignment="Center"
+                       IsVisible="false" TextColor="Red" FontSize="Medium"
+                       BackgroundColor="Black" HorizontalOptions="Fill"/>
+            </VerticalStackLayout>
+
+            <!--Score displayed above grid-->
+            <VerticalStackLayout>
+                <Label Text="Select Grid Size" x:Name="ScoreUI"  HorizontalOptions="Center" Padding="2"
+                       Margin="5" TextColor="Gold" FontSize="Medium" BackgroundColor="Black"/>
+            </VerticalStackLayout>
+
+            <!--4x4 GRID-->
+            <Grid x:Name="GameGrid4x4" BackgroundColor="GreenYellow"
+               VerticalOptions="Center" HorizontalOptions="Center"
+               HeightRequest="300" WidthRequest="300"
+               IsVisible="false">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <!--Mole-->
+                <ImageButton Source="mole.png"
+                         HeightRequest="70" WidthRequest="70" 
+                         Grid.Row="0" Grid.Column="0"
+                         HorizontalOptions="Center" VerticalOptions="Center" >
+                    <ImageButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MoleWhacked" NumberOfTapsRequired="1">
+                        </TapGestureRecognizer>
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+
+                <ImageButton Source="mole.png"
+                         HeightRequest="70" WidthRequest="70" 
+                         Grid.Row="0" Grid.Column="1"
+                         HorizontalOptions="Center" VerticalOptions="Center" >
+                    <ImageButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MoleWhacked" NumberOfTapsRequired="1">
+                        </TapGestureRecognizer>
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+
+                <ImageButton Source="mole.png"
+                         HeightRequest="70" WidthRequest="70" 
+                         Grid.Row="2" Grid.Column="4"
+                         HorizontalOptions="Center" VerticalOptions="Center" >
+                    <ImageButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MoleWhacked" NumberOfTapsRequired="1">
+                        </TapGestureRecognizer>
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+
+            </Grid>
+
+            <!-- 5x5 GRID-->
+            <Grid x:Name="GameGrid5x5" BackgroundColor="GreenYellow"
+               VerticalOptions="Center" HorizontalOptions="Center"
+               HeightRequest="300" WidthRequest="300"
+               IsVisible="false">
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <ImageButton Source="mole.png"
+                         HeightRequest="55" WidthRequest="55" 
+                         Grid.Row="0" Grid.Column="0"
+                         HorizontalOptions="Center" VerticalOptions="Center" >
+                    <ImageButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MoleWhacked" NumberOfTapsRequired="1">
+                        </TapGestureRecognizer>
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+
+                <ImageButton Source="mole.png"
+                         HeightRequest="55" WidthRequest="55" 
+                         Grid.Row="0" Grid.Column="1"
+                         HorizontalOptions="Center" VerticalOptions="Center" >
+                    <ImageButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MoleWhacked" NumberOfTapsRequired="1">
+                        </TapGestureRecognizer>
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+
+                <ImageButton Source="mole.png"
+                         HeightRequest="55" WidthRequest="55" 
+                         Grid.Row="2" Grid.Column="4"
+                         HorizontalOptions="Center" VerticalOptions="Center" >
+                    <ImageButton.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="MoleWhacked" NumberOfTapsRequired="1">
+                        </TapGestureRecognizer>
+                    </ImageButton.GestureRecognizers>
+                </ImageButton>
+
+            </Grid>
+
+            <!--Grid button-->
+            <VerticalStackLayout Margin="5">
+                <Button x:Name="GridButton" Text="5x5" HorizontalOptions="Center" Clicked="GridChange"
+                    IsVisible="true" BackgroundColor="OrangeRed" TextColor="Black"/>
+            </VerticalStackLayout>
+
+            <!--Start/Quit button-->
+            <VerticalStackLayout>
+                <Button x:Name="StartButton" Text="Start" HorizontalOptions="Center" Clicked="StartGame"
+                        BackgroundColor="SeaGreen" TextColor="Black"/>
+            </VerticalStackLayout>
+
+            <!--Texted that is displayed when quit is tapped-->
+            <VerticalStackLayout>
+                <Label x:Name="Question"  Text="Are you sure you want to quit?" HorizontalOptions="Center"
+                       TextColor="Black" IsVisible="false"/>
+            
+                <!--Yes/No Buttons-->
+                <Button x:Name="YesBtn" Text="Yes" HorizontalOptions="Center" Clicked="Yes" Margin="5"
+                        BackgroundColor="CadetBlue" TextColor="Black" IsVisible="false"/>
+            
+                <Button x:Name="NopeBtn" Text="No" HorizontalOptions="Center" Clicked="Nope"
+                        BackgroundColor="CadetBlue" TextColor="Black" IsVisible="false"/>
+            </VerticalStackLayout>
+
+            <!--Previous score display-->
+            <VerticalStackLayout x:Name="PSdisplay" IsVisible="true">
+                <Label Text="Previous Score" TextColor="Black" HorizontalOptions="Center"/>
+                <Label x:Name="PS" Text="0" TextColor="DarkGreen" HorizontalOptions="Center" FontSize="Medium"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
